@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        .body {
+            padding: 0px;
+            margin: 0px;
+        }
+        .box {
+            border: 1px solid black;
+            display: inline-block;
+            padding: 0;
+            margin: 0;
+        }
+        .container {
+            align-content: center;
+            margin: auto;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Etch-A-Sketch</title>
+</head>
+<body>
+    <div><button>Create/Reset Board</button></div>
+    <div id="container"></div>
+
+    <script>
+        let container = document.getElementById('container');
+
+        function createGrid(size=16) {
+            container.innerHTML = '';
+            let boxSize = Number((960-2*size) / (size));
+            for (let i=0; i< size; i++) {
+                for (let j=0; j<size; j++) {
+                    let div = document.createElement('div');
+                    div.className = "box";
+                    
+
+                    div.style.height = boxSize + 'px';
+                    div.style.width = boxSize + 'px';
+                    container.appendChild(div);
+                }
+                let br = document.createElement('br');
+                container.appendChild(br);
+            }
+        }
+
+        function createEventListeners(childrenArray) {
+            childrenArray.forEach(box => {
+                box.addEventListener('mouseover', () => {
+                    let r = Math.floor(Math.random() * 256);
+                    let g = Math.floor(Math.random() * 256);
+                    let b = Math.floor(Math.random() * 256);
+                    box.style.backgroundColor = `rgb(${b},${g},${r})`;
+                });
+            });
+        }
+        const button = document.querySelector('button');
+        button.addEventListener('click', () => {
+            let size = prompt("Enter the grid size");
+            createGrid(Number(size));
+            const boxNodeList = container.querySelectorAll('.box');
+            const boxArray = Array.from(boxNodeList);
+            createEventListeners(boxArray);
+        });
+
+    </script>
+</body>
+</html>

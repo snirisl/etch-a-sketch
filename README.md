@@ -1,0 +1,1 @@
+This is a repo for Project's Odin WEB Dev introduction's project - Etch-a-Sketch!
