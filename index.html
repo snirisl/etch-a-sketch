@@ -49,11 +49,12 @@
 
         function createEventListeners(childrenArray) {
             childrenArray.forEach(box => {
-                box.addEventListener('mouseover', () => {
+                box.addEventListener('mouseover', function setColor() {
                     let r = Math.floor(Math.random() * 256);
                     let g = Math.floor(Math.random() * 256);
                     let b = Math.floor(Math.random() * 256);
                     box.style.backgroundColor = `rgb(${b},${g},${r})`;
+                    box.removeEventListener('mouseover', setColor);
                 });
             });
         }
@@ -64,6 +65,7 @@
             const boxNodeList = container.querySelectorAll('.box');
             const boxArray = Array.from(boxNodeList);
             createEventListeners(boxArray);
+
         });
 
     </script>
